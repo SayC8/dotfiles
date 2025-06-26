@@ -1,0 +1,6 @@
+theme = gruber-darker
+
+font-family = "Iosevka Nerd Font"
+font-size = 18
+
+scrollback-limit = 1200

@@ -1,0 +1,6 @@
+alias hx="helix"
+
+alias cdd="cd ~/dotfiles/"
+alias cdc="cd ~/dotfiles/.config/"
+alias cdh="cd ~/dotfiles/.config/helix"
+alias cdg="cd ~/dotfiles/.config/ghostty"

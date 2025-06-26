@@ -1,0 +1,4 @@
+# Configs
+
+* helix
+* ghostty

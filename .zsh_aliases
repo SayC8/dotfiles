@@ -3,6 +3,7 @@ alias la="ls -la"
 
 alias hx="helix"
 
+alias cdd="cd ~/dotfiles/"
 alias cdc="cd ~/dotfiles/.config"
 alias cdg="cd ~/dotfiles/.config/ghostty"
 alias cdh="cd ~/dotfiles/.config/helix"

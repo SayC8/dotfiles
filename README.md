@@ -16,10 +16,10 @@ your shell of choice.
 
 This is done like so:
 
-'''
+```
 
 if [ -f ~/dotfiles/.aliases ]; then
   . ~/dotfiles/.aliases
 fi
 
-'''
+```

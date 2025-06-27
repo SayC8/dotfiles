@@ -8,6 +8,7 @@ shell = ["zsh", "-c"]
 cursorline = true
 continue-comments = false
 color-modes = true
+bufferline = "multiple"
 
 [editor.cursor-shape]
 insert = "bar"

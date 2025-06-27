@@ -7,3 +7,6 @@ alias cdd="cd ~/dotfiles/"
 alias cdc="cd ~/dotfiles/.config"
 alias cdg="cd ~/dotfiles/.config/ghostty"
 alias cdh="cd ~/dotfiles/.config/helix"
+
+alias ghv="gh repo view -w"
+alias gst="git status"

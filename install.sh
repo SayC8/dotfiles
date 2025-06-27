@@ -9,7 +9,7 @@ if [ -f /bin/pacman ]; then
   cd ~/dotfiles
   stow .
   echo "Finished installing."
-  echo "Since zsh has its own setup, install it separately."
+  echo "Since zsh and oh-my-zsh has their own setup, install them separately."
 else
   echo "ERROR: pacman not found!"
 fi

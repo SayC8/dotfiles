@@ -1,0 +1,9 @@
+[[language]]
+name = "odin"
+scope = "source.odin"
+injection-regex = "odin"
+file-types = ["odin"]
+indent = { tab-width = 4, unit = " " }
+formatter = { command = "odinfmt", args = ["--stdin"] }
+language-servers = [ "ols" ]
+auto-format = true

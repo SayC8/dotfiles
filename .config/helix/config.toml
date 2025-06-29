@@ -21,5 +21,7 @@ hidden = false
 [keys.normal.space]
 space = "command_mode"
 
+# Compiling
 [keys.normal."+"]
 m = ":sh make"
+o = ":sh odin run ." 

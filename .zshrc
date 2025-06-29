@@ -106,3 +106,7 @@ source $ZSH/oh-my-zsh.sh
 if [ -f ~/dotfiles/.aliases ]; then
   . ~/dotfiles/.aliases
 fi
+
+# Odin stuff
+export PATH=~/programming/tools/Odin:$PATH
+export PATH=~/programming/tools/ols:$PATH

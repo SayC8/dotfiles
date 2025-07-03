@@ -3,7 +3,7 @@ theme = "gruber-darker"
 [editor]
 line-number = "relative"
 mouse = false
-scrolloff = 8
+scrolloff = 12
 shell = ["zsh", "-c"]
 cursorline = true
 continue-comments = false

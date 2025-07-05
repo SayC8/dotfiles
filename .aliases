@@ -2,6 +2,8 @@ alias l="ls"
 alias la="ls -la"
 
 alias hx="helix"
+alias vim="nvim"
+alias vi="nvim"
 
 alias cdd="cd ~/dotfiles/"
 alias cdc="cd ~/dotfiles/.config"

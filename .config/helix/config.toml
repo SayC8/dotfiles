@@ -2,7 +2,7 @@ theme = "gruber-darker"
 
 [editor]
 line-number = "relative"
-mouse = false
+mouse = true
 scrolloff = 12
 shell = ["zsh", "-c"]
 cursorline = true

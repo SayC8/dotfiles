@@ -2,13 +2,11 @@ alias l="ls"
 alias la="ls -la"
 
 alias hx="helix"
-alias vim="nvim"
 
 alias cdd="cd ~/dotfiles/"
 alias cdc="cd ~/dotfiles/.config"
 alias cdg="cd ~/dotfiles/.config/ghostty"
 alias cdh="cd ~/dotfiles/.config/helix"
-alias cdn="cd ~/dotfiles/.config/nvim"
 
 alias ghv="gh repo view -w"
 alias gst="git status"

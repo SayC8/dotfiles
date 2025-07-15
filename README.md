@@ -1,5 +1,6 @@
 # Configs
 * helix
+* neovim
 * ghostty
 
 ### Requires the following

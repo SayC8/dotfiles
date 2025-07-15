@@ -10,6 +10,7 @@ o.tabstop = 4
 o.softtabstop = 4
 o.autoindent = true
 o.smartindent = true
+o.wrap = false
 
 o.smartcase = true
 o.ignorecase = true

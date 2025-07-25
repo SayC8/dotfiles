@@ -15,3 +15,6 @@ o.wrap = false
 o.smartcase = true
 o.ignorecase = true
 o.hlsearch = true
+
+o.scrolloff = 8
+o.sidescrolloff = 8

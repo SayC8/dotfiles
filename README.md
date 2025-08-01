@@ -1,9 +1,5 @@
 # Setup
 
-## Requirements (kinda)
-
-[Omarchy](https://omarchy.org/)
-
 ```bash
 
 cd ~/
@@ -23,6 +19,7 @@ fi
 
 ## Extra stuff
 
+I am currently using [Omarchy](https://omarchy.org/) as a baseline setup.
 Edit hyprland.conf to include:
 
 ```conf

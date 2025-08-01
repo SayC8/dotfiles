@@ -21,12 +21,6 @@ fi
 
 ```
 
-## Custom
-
-- bash aliases
-
----
-
 ## Extra stuff
 
 Edit hyprland.conf to include:

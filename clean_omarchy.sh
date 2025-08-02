@@ -1,7 +1,10 @@
 #!/bin/bash
 
-set -xe
+set -x
 
-PACKAGES="spotify 1password signal-desktop"
+REMOVE="spotify 1password signal-desktop"
+INSTALL="bauh"
 
-yay -Rns $UNINSTALL
+yay -Rns $REMOVE
+yay -S $INSTALL --noconfirm
+yay -Yc

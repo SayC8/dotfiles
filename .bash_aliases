@@ -2,7 +2,7 @@
 # alias vim="nvim"
 alias vim="bob run nightly"
 
-# Quick navigation
+# Navigation
 alias cdd="cd ~/dotfiles && ls"
 alias cdc="cd ~/dotfiles/.config/ && ls"
 alias cdn="cd ~/dotfiles/.config/nvim && ls"

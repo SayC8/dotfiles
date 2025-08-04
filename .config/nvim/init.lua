@@ -29,8 +29,12 @@ map('n', '<leader>h', ':Pick help<CR>')
 map('n', '<leader>/', ':Pick grep_live<CR>')
 map('n', '<leader>e', ':Oil --float<CR>')
 
+map('n', '\\', ':term ')
+
 map('n', '<leader>cf', vim.lsp.buf.format)
 map('n', '<leader>ca', vim.lsp.buf.code_action)
+
+map('n', '<leader>d', ':bdelete<CR>')
 
 -- Plugins
 vim.pack.add({
@@ -45,11 +49,14 @@ require "oil".setup()
 
 require "mini.icons".setup()
 require "mini.pairs".setup()
+require "mini.surround".setup()
 require "mini.move".setup()
 require "mini.git".setup()
 require "mini.diff".setup()
 require "mini.pick".setup()
 require "mini.indentscope".setup()
+require "mini.statusline".setup()
+require "mini.tabline".setup()
 
 -- LSP
 require "mason".setup()

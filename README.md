@@ -1,7 +1,7 @@
 # Setup
 
 I am currently using [Omarchy](https://omarchy.org/) bare version as a baseline setup.
-Also [bob]() to manage neovim versions
+Also [bob](https://github.com/MordechaiHadad/bob) to manage neovim versions
 
 ```bash
 

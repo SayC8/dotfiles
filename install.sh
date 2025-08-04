@@ -1,10 +1,18 @@
 #!/bin/bash
 
 echo "--------------------"
+echo "Cleaning up a little"
+REMOVE="neovim"
+yay -Rns $REMOVE
+rm -rfv $HOME/.local/share/nvim
+rm -rfv $HOME/.local/state/nvim
+rm -rfv $HOME/.cache/nvim
+
+echo "--------------------"
 echo "Installing stow and bob (neovim version switcher)"
 sleep 1
 INSTALL="stow bob"
-yay -S $INSTALL --noconfirm
+yay -S $INSTALL
 yay -Yc
 
 echo "--------------------"

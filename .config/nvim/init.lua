@@ -12,8 +12,10 @@ o.shiftwidth = 4
 o.smartindent = true
 o.wrap = false
 o.swapfile = false
-o.undofile = false
+o.undofile = true
 o.incsearch = true
+o.smartcase = true
+o.ignorecase = true
 o.scrolloff = 8
 o.sidescrolloff = 8
 
@@ -57,6 +59,8 @@ require "mini.pick".setup()
 require "mini.indentscope".setup()
 require "mini.statusline".setup()
 require "mini.tabline".setup()
+require "mini.jump2d".setup()
+require "mini.extra".setup()
 
 -- LSP
 require "mason".setup()

@@ -1,11 +1,12 @@
 # Setup
 
 I am currently using [Omarchy](https://omarchy.org/) bare version as a baseline setup.
+Also [bob]() to manage neovim versions
 
 ```bash
 
 cd ~/
-git clone https://github.com/SayC8/dotfiles.git
+git clone https://github.com/SayC8/dotfiles
 cd ~/dotfiles
 ./install.sh
 
@@ -17,15 +18,4 @@ if [ -f "$ALIASES_FILE" ]; then
   source "$ALIASES_FILE"
 fi
 
-```
-
-## Extra stuff
-
-Edit hyprland.conf to include:
-
-```conf
-input {
-  kb_options = caps:escape
-  repeat_delay = 300
-}
 ```

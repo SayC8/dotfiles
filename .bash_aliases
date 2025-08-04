@@ -3,9 +3,9 @@
 alias vim="bob run nightly"
 
 # Quick navigation
-alias cdd="cd ~/dotfiles"
-alias cdc="cd ~/dotfiles/.config/"
-alias cdn="cd ~/dotfiles/.config/nvim"
+alias cdd="cd ~/dotfiles && ls"
+alias cdc="cd ~/dotfiles/.config/ && ls"
+alias cdn="cd ~/dotfiles/.config/nvim && ls"
 
 # Git stuff
 alias gst="git status"

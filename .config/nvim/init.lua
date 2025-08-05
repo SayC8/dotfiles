@@ -18,6 +18,7 @@ o.smartcase = true
 o.ignorecase = true
 o.scrolloff = 8
 o.sidescrolloff = 8
+o.completeopt = "menuone,fuzzy,noinsert,popup,preview"
 
 -- Keymaps
 vim.g.mapleader = " "
@@ -32,12 +33,16 @@ map('n', '<leader>fd', ':Pick diagnostic<CR>')
 map('n', '<leader>/', ':Pick grep_live<CR>')
 map('n', '<leader>e', ':Oil --float<CR>')
 
-map('n', '\\', ':term ')
-
 map('n', '<leader>cf', vim.lsp.buf.format)
 map('n', '<leader>ca', vim.lsp.buf.code_action)
+map('n', '<leader>cr', vim.lsp.buf.rename)
 
 map('n', '<leader>bd', ':bdelete<CR>')
+
+map('n', '<leader>t', function()
+	vim.cmd(":bot term")
+	vim.cmd(":resize 10")
+end)
 
 -- Plugins
 vim.pack.add({
@@ -81,7 +86,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end
 	end,
 })
-vim.cmd("set completeopt+=noselect")
 
 -- Colors
 require("everforest").setup({ background = "medium", })

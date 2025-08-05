@@ -1,6 +1,9 @@
+--------------------------
 -- Options
+--------------------------
 local o = vim.o
 o.termguicolors = true
+o.showmode = false
 o.background = "dark"
 o.number = true
 o.relativenumber = true
@@ -13,38 +16,93 @@ o.smartindent = true
 o.wrap = false
 o.swapfile = false
 o.undofile = true
+o.undolevels = 10000
 o.incsearch = true
 o.smartcase = true
 o.ignorecase = true
 o.scrolloff = 8
 o.sidescrolloff = 8
-o.completeopt = "menuone,fuzzy,noinsert,popup,preview"
+o.completeopt = "menu,menuone,fuzzy,noselect,popup,preview"
+o.cursorline = true
+o.splitright = true
+o.splitbelow = true
 
+--------------------------
 -- Keymaps
+--------------------------
 vim.g.mapleader = " "
 local map = vim.keymap.set
 
-map('n', '<leader>o', ':update<CR> :source<CR>')
-map('n', '<leader>w', ':write<CR>')
-map('n', '<leader>q', ':quit<CR>')
-map('n', '<leader>ff', ':Pick files<CR>')
-map('n', '<leader>fh', ':Pick help<CR>')
-map('n', '<leader>fd', ':Pick diagnostic<CR>')
-map('n', '<leader>/', ':Pick grep_live<CR>')
-map('n', '<leader>e', ':Oil --float<CR>')
+map('n', '<leader>o', ':update<CR> :source<CR>', { desc = "Source lua file" })
+map('n', '<leader>w', ':write<CR>', { desc = "Save current file " })
+map('n', '<leader>q', ':quit<CR>', { desc = "Quit" })
+map('n', '<leader>ff', ':Pick files<CR>', { desc = "Search files" })
+map('n', '<leader>fo', ':Pick oldfiles<CR>', { desc = "Search old files" })
+map('n', '<leader>fb', ':Pick buffers<CR>', { desc = "Search buffers" })
+map('n', '<leader>fh', ':Pick help<CR>', { desc = "Search help" })
+map('n', '<leader>fd', ':Pick diagnostic<CR>', { desc = "Search diagnostics" })
+map('n', '<leader>f:', ':Pick history<CR>', { desc = "Search command history" })
+map('n', '<leader>/', ':Pick grep_live<CR>', { desc = "Live grep" })
+map('n', '<leader>e', ':Oil --float<CR>', { desc = "File explorere (oil)" })
 
-map('n', '<leader>cf', vim.lsp.buf.format)
-map('n', '<leader>ca', vim.lsp.buf.code_action)
-map('n', '<leader>cr', vim.lsp.buf.rename)
+map('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code format" })
+map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code actions" })
+map('n', '<leader>cr', vim.lsp.buf.rename, { desc = "Rename" })
+map('n', '<leader>ct', function()
+	vim.cmd("lua MiniTrailspace.trim()")
+	vim.cmd("lua MiniTrailspace.trim_last_lines()")
+end, { desc = "Clean trailing whitespace" })
 
-map('n', '<leader>bd', ':bdelete<CR>')
+map('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete current buffer" })
+
+map('n', '<leader>uc', ':Pick colorschemes<CR>', { desc = "Colorschemes" })
 
 map('n', '<leader>t', function()
 	vim.cmd(":bot term")
 	vim.cmd(":resize 10")
-end)
+end, { desc = "Open a terminal" })
 
+
+--------------------------
+-- Auto-commands etc
+--------------------------
+local function augroup(name)
+	return vim.api.nvim_create_augroup("customGroup_" .. name, { clear = true })
+end
+
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = augroup("highlight_yank"),
+	callback = function()
+		(vim.hl or vim.highlight).on_yank()
+	end,
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+	group = augroup("resize_splits"),
+	callback = function()
+		local current_tab = vim.fn.tabpagenr()
+		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
+	end,
+})
+
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	group = augroup("auto_create_dir"),
+	callback = function(event)
+		if event.match:match("^%w%w+:[\\/][\\/]") then
+			return
+		end
+		local file = vim.uv.fs_realpath(event.match) or event.match
+		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+	end,
+})
+
+--------------------------
 -- Plugins
+--------------------------
 vim.pack.add({
 	{ src = "https://github.com/neanias/everforest-nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
@@ -57,7 +115,7 @@ require "oil".setup()
 
 require "mini.icons".setup()
 require "mini.pairs".setup()
-require "mini.surround".setup()
+require "mini.trailspace".setup()
 require "mini.move".setup()
 require "mini.git".setup()
 require "mini.diff".setup()
@@ -68,7 +126,64 @@ require "mini.tabline".setup()
 require "mini.jump2d".setup()
 require "mini.extra".setup()
 
+require "mini.surround".setup()
+
+local miniclue = require('mini.clue')
+miniclue.setup({
+	triggers = {
+		-- Leader triggers
+		{ mode = 'n', keys = '<Leader>' },
+		{ mode = 'x', keys = '<Leader>' },
+
+		-- Built-in completion
+		{ mode = 'i', keys = '<C-x>' },
+
+		-- `g` key
+		{ mode = 'n', keys = 'g' },
+		{ mode = 'x', keys = 'g' },
+
+		-- `s` key
+		{ mode = 'n', keys = 's' },
+		{ mode = 'x', keys = 's' },
+
+		-- Square brackets
+		{ mode = 'n', keys = ']' },
+		{ mode = 'n', keys = '[' },
+
+		-- Marks
+		{ mode = 'n', keys = "'" },
+		{ mode = 'n', keys = '`' },
+		{ mode = 'x', keys = "'" },
+		{ mode = 'x', keys = '`' },
+
+		-- Registers
+		{ mode = 'n', keys = '"' },
+		{ mode = 'x', keys = '"' },
+		{ mode = 'i', keys = '<C-r>' },
+		{ mode = 'c', keys = '<C-r>' },
+
+		-- Window commands
+		{ mode = 'n', keys = '<C-w>' },
+
+		-- `z` key
+		{ mode = 'n', keys = 'z' },
+		{ mode = 'x', keys = 'z' },
+	},
+
+	clues = {
+		-- Enhance this by adding descriptions for <Leader> mapping groups
+		miniclue.gen_clues.builtin_completion(),
+		miniclue.gen_clues.g(),
+		miniclue.gen_clues.marks(),
+		miniclue.gen_clues.registers(),
+		miniclue.gen_clues.windows(),
+		miniclue.gen_clues.z(),
+	},
+})
+
+--------------------------
 -- LSP
+--------------------------
 require "mason".setup()
 require "nvim-treesitter.configs".setup({
 	ensure_installed = { "lua", "c" },
@@ -87,7 +202,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
+--------------------------
 -- Colors
+--------------------------
 require("everforest").setup({ background = "medium", })
 vim.cmd("colorscheme everforest")
 -- vim.cmd(":hi statusline guibg=NONE")
+--

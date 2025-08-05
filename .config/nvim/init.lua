@@ -6,9 +6,9 @@ o.number = true
 o.relativenumber = true
 o.signcolumn = 'yes'
 o.winborder = "rounded"
-o.tabstop = 4
-o.softtabstop = 4
-o.shiftwidth = 4
+o.tabstop = 2
+o.softtabstop = 2
+o.shiftwidth = 2
 o.smartindent = true
 o.wrap = false
 o.swapfile = false
@@ -26,8 +26,9 @@ local map = vim.keymap.set
 map('n', '<leader>o', ':update<CR> :source<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':quit<CR>')
-map('n', '<leader>f', ':Pick files<CR>')
-map('n', '<leader>h', ':Pick help<CR>')
+map('n', '<leader>ff', ':Pick files<CR>')
+map('n', '<leader>fh', ':Pick help<CR>')
+map('n', '<leader>fd', ':Pick diagnostic<CR>')
 map('n', '<leader>/', ':Pick grep_live<CR>')
 map('n', '<leader>e', ':Oil --float<CR>')
 
@@ -36,7 +37,7 @@ map('n', '\\', ':term ')
 map('n', '<leader>cf', vim.lsp.buf.format)
 map('n', '<leader>ca', vim.lsp.buf.code_action)
 
-map('n', '<leader>d', ':bdelete<CR>')
+map('n', '<leader>bd', ':bdelete<CR>')
 
 -- Plugins
 vim.pack.add({

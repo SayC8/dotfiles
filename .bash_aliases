@@ -1,5 +1,5 @@
 # Programs
-# alias vim="nvim"
+# alias vim="bob run stable"
 alias vim="bob run nightly"
 
 # Navigation

@@ -14,6 +14,8 @@ sleep 1
 INSTALL="stow bob"
 yay -S $INSTALL
 yay -Yc
+bob install stable
+bob use nightly
 
 echo "--------------------"
 echo "Installing dots"
@@ -25,6 +27,7 @@ source "$HOME./bashrc"
 
 if [ -f "$HOME/.bash_aliases" ]; then
 	source "$HOME/.bashrc"
+	source "$HOME/.bash_aliases"
 	echo "--------------------"
 	echo "Success"
 else

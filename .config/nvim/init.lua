@@ -108,7 +108,6 @@ vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/neanias/everforest-nvim" },
 	{ src = "https://github.com/ribru17/bamboo.nvim" },
 })
 

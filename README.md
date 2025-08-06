@@ -1,7 +1,7 @@
 # Setup
 
 I am currently using [Omarchy](https://omarchy.org/) bare version as a baseline setup.
-[bob](https://github.com/MordechaiHadad/bob) is used to manage neovim versions.
+[bob](https://github.com/MordechaiHadad/bob) is used to manage [neovim](https://github.com/neovim/neovim) versions.
 
 When using the install script Bob will install both the stable and nightly versions.
 The nightly version is set as the default. (Check .bash_aliases to change)

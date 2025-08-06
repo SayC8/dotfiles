@@ -23,7 +23,7 @@ o.ignorecase = true
 o.scrolloff = 8
 o.sidescrolloff = 8
 o.completeopt = "menu,menuone,fuzzy,noselect,popup,preview"
-o.cursorline = true
+o.cursorline = false
 o.splitright = true
 o.splitbelow = true
 
@@ -57,7 +57,7 @@ map('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete current buffer" })
 
 map('n', '<leader>uc', ':Pick colorschemes<CR>', { desc = "Colorschemes" })
 
-map('n', '<leader>t', function()
+map('n', '<C-/>', function()
 	vim.cmd(":bot term")
 	vim.cmd(":resize 10")
 end, { desc = "Open a terminal" })
@@ -104,11 +104,12 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- Plugins
 --------------------------
 vim.pack.add({
-	{ src = "https://github.com/neanias/everforest-nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/echasnovski/mini.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/neanias/everforest-nvim" },
+	{ src = "https://github.com/ribru17/bamboo.nvim" },
 })
 
 require "oil".setup()
@@ -206,6 +207,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Colors
 --------------------------
 require("everforest").setup({ background = "medium", })
-vim.cmd("colorscheme everforest")
--- vim.cmd(":hi statusline guibg=NONE")
---
+require("bamboo").setup({
+	transparent = true,
+	diagnosistics = {
+		darker = true,
+		undercurl = true,
+	}
+})
+
+vim.cmd("colorscheme bamboo")

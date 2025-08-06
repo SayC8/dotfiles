@@ -206,13 +206,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --------------------------
 -- Colors
 --------------------------
-require("everforest").setup({ background = "medium", })
 require("bamboo").setup({
 	transparent = true,
-	diagnosistics = {
-		darker = true,
-		undercurl = true,
-	}
 })
 
 vim.cmd("colorscheme bamboo")

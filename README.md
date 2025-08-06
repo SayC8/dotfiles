@@ -1,7 +1,8 @@
 # Setup
 
 I am currently using [Omarchy](https://omarchy.org/) bare version as a baseline setup.
-Also [bob](https://github.com/MordechaiHadad/bob) to manage neovim versions
+[bob](https://github.com/MordechaiHadad/bob) is used to manage neovim versions.
+And I also have [omarchy-osaka-jade-theme](https://github.com/Justikun/omarchy-osaka-jade-theme)
 
 ```bash
 
@@ -19,3 +20,14 @@ if [ -f "$ALIASES_FILE" ]; then
 fi
 
 ```
+
+## Neovim
+
+Recently switched to a more barebones setup with nvim v0.12.
+
+The main plugins are:
+
+- [mini](https://github.com/echasnovski/mini.nvim)
+- [oil](https://github.com/stevearc/oil.nvim)
+
+Colorscheme: [bamboo](https://github.com/ribru17/bamboo.nvim)

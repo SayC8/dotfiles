@@ -206,7 +206,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Colors
 --------------------------
 require("bamboo").setup({
+	style = "multiplex",
+	toggle_style_key = "<leader>ut",
 	transparent = true,
+	code_style = {
+		comments = { italic = true, bold = true },
+		conditionals = { italic = true },
+		keywords = {},
+		functions = {},
+		namespaces = { italic = true },
+		parameters = { italic = true },
+		strings = { italic = true },
+		variables = {},
+	},
+	diagnostics = {
+		darker = false,
+		undercurl = true,
+		background = true,
+	},
 })
-
-vim.cmd("colorscheme bamboo")
+require("bamboo").load()

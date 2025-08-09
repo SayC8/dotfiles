@@ -62,6 +62,7 @@ map('n', '<C-/>', function()
 	vim.cmd(":resize 10")
 end, { desc = "Open a terminal" })
 
+map('n', '<leader>pu', vim.pack.update, { desc = "Update plugins" })
 
 --------------------------
 -- Auto-commands etc
@@ -125,7 +126,6 @@ require "mini.statusline".setup()
 require "mini.tabline".setup()
 require "mini.jump2d".setup()
 require "mini.extra".setup()
-
 require "mini.surround".setup()
 
 local miniclue = require('mini.clue')
@@ -191,13 +191,13 @@ require "nvim-treesitter.configs".setup({
 	highlight = { enable = true },
 })
 
-vim.lsp.enable({ "lua_ls", "clangd" })
+vim.lsp.enable({ "lua_ls", "clangd", "pylsp" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
-		local c = vim.lsp.get_client_by_id(ev.data.client_id)
-		if c:supports_method('textDocument/completion') then
-			vim.lsp.completion.enable(true, c.id, ev.buf, { autotrigger = true })
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client:supports_method('textDocument/completion') then
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
 		end
 	end,
 })

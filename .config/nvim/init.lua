@@ -64,6 +64,42 @@ end, { desc = "Open a terminal" })
 
 map('n', '<leader>pu', vim.pack.update, { desc = "Update plugins" })
 
+map('n', '<leader>ce', function()
+	local filename = vim.fn.expand("%")
+	local basename = vim.fn.expand("%:r")
+	local filetype = vim.bo.filetype
+	local cmd = nil
+	local function checkFile(name)
+		local f = io.open(name, "r")
+		if f then
+			io.close(f)
+			return true
+		else
+			return false
+		end
+	end
+	if filetype == "python" then
+		cmd = "term python3 " .. filename
+	elseif filetype == "c" then
+		if checkFile("./Makefile") then
+			cmd = "term make"
+		elseif checkFile("./build") then
+			cmd = "term ./build.sh"
+		else
+			print("No Makefile or build.sh detected in CWD")
+		end
+	end
+	if cmd then
+		vim.cmd("w")
+		vim.cmd("split")
+		vim.cmd("resize 10")
+		vim.cmd(cmd)
+		vim.cmd("norm G")
+	else
+		print("No interpreter or compiler defined for filetype: '" .. filetype .. "'")
+	end
+end)
+
 --------------------------
 -- Auto-commands etc
 --------------------------

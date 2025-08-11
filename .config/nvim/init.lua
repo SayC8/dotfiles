@@ -43,7 +43,7 @@ map('n', '<leader>fh', ':Pick help<CR>', { desc = "Search help" })
 map('n', '<leader>fd', ':Pick diagnostic<CR>', { desc = "Search diagnostics" })
 map('n', '<leader>f:', ':Pick history<CR>', { desc = "Search command history" })
 map('n', '<leader>/', ':Pick grep_live<CR>', { desc = "Live grep" })
-map('n', '<leader>e', ':Oil --float<CR>', { desc = "File explorere (oil)" })
+map('n', '<leader>e', ':Oil --float<CR>', { desc = "File explorer (oil)" })
 
 map('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code format" })
 map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code actions" })
@@ -78,8 +78,8 @@ map('n', '<leader>ce', function()
 			return false
 		end
 	end
-	if filetype == "python" then
-		cmd = "term python3 " .. filename
+	if filetype == "lua" then
+		cmd = "term lua " .. filename
 	elseif filetype == "c" then
 		if checkFile("./Makefile") then
 			cmd = "term make"
@@ -98,7 +98,7 @@ map('n', '<leader>ce', function()
 	else
 		print("No interpreter or compiler defined for filetype: '" .. filetype .. "'")
 	end
-end)
+end, { desc = "Code Execute/Compile" })
 
 --------------------------
 -- Auto-commands etc
@@ -160,9 +160,11 @@ require "mini.pick".setup()
 require "mini.indentscope".setup()
 require "mini.statusline".setup()
 require "mini.tabline".setup()
-require "mini.jump2d".setup()
 require "mini.extra".setup()
 require "mini.surround".setup()
+
+require "mini.snippets".setup()
+require "mini.completion".setup()
 
 local miniclue = require('mini.clue')
 miniclue.setup({
@@ -227,7 +229,7 @@ require "nvim-treesitter.configs".setup({
 	highlight = { enable = true },
 })
 
-vim.lsp.enable({ "lua_ls", "clangd", "pylsp" })
+vim.lsp.enable({ "lua_ls", "clangd", "bash-language-server", "marksman" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)

@@ -14,7 +14,9 @@ sleep 1
 INSTALL="stow bob"
 yay -S $INSTALL
 yay -Yc
-bob install stable
+bob uninstall stable
+bob use stable
+bob uninstall nightly
 bob use nightly
 
 echo "--------------------"

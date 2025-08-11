@@ -14,7 +14,7 @@ dynamic_padding = true
 padding.x = 4
 padding.y = 4
 decorations = "None"
-opacity = 0.98
+opacity = 0.88
 
 [keyboard]
 bindings = [

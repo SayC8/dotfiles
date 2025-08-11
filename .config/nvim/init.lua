@@ -82,11 +82,10 @@ map('n', '<leader>ce', function()
 		cmd = "term lua " .. filename
 	elseif filetype == "c" then
 		if checkFile("./Makefile") then
-			cmd = "term make"
-		elseif checkFile("./build") then
-			cmd = "term ./build.sh"
+			cmd = "term make && ./bin/" .. basename
 		else
-			print("No Makefile or build.sh detected in CWD")
+			print("No Makefile detected!")
+			return
 		end
 	end
 	if cmd then
@@ -164,7 +163,12 @@ require "mini.extra".setup()
 require "mini.surround".setup()
 
 require "mini.snippets".setup()
-require "mini.completion".setup()
+require "mini.completion".setup({
+	window = {
+		info = { height = 25, width = 80, border = "rounded" },
+		signature = { height = 25, width = 80, border = "rounded" },
+	}
+})
 
 local miniclue = require('mini.clue')
 miniclue.setup({

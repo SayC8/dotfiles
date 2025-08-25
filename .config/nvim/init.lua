@@ -81,7 +81,7 @@ map('n', '<leader>ce', function()
     end
     if filetype == "lua" then
         cmd = "term lua " .. filename
-    elseif filetype == "c" then
+    elseif filetype == "c" or filetype == "odin" then
         if checkFile("./Makefile") then
             cmd = "term make && ./bin/" .. basename
         else
@@ -234,7 +234,7 @@ require "nvim-treesitter.configs".setup({
     highlight = { enable = true },
 })
 
-vim.lsp.enable({ "lua_ls", "clangd", "bash-language-server", "marksman" })
+vim.lsp.enable({ "lua_ls", "clangd", "bash-language-server", "marksman", "ols" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)

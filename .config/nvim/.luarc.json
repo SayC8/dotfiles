@@ -2,5 +2,8 @@
     "diagnostics.disable": [
         "need-check-nil",
         "missing-fields"
+    ],
+    "diagnostics.globals": [
+        "vim"
     ]
 }

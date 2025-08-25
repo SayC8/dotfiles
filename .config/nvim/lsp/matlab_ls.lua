@@ -14,6 +14,8 @@
 ---   },
 --- },
 --- ```
+
+---@type vim.lsp.Config
 return {
   cmd = { 'matlab-language-server', '--stdio' },
   filetypes = { 'matlab' },

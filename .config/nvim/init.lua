@@ -46,13 +46,6 @@ map('n', '<leader>f:', ':Pick history<CR>', { desc = "Search command history" })
 map('n', '<leader>/', ':Pick grep_live<CR>', { desc = "Live grep" })
 map('n', '<leader>e', ':Oil --float<CR>', { desc = "File explorer (oil)" })
 
-map('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code format" })
-map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code actions" })
-map('n', '<leader>cr', vim.lsp.buf.rename, { desc = "Rename" })
-map('n', '<leader>ct', function()
-    vim.cmd("lua MiniTrailspace.trim()")
-    vim.cmd("lua MiniTrailspace.trim_last_lines()")
-end, { desc = "Clean trailing whitespace" })
 
 map('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete current buffer" })
 
@@ -65,6 +58,9 @@ end, { desc = "Open a terminal" })
 
 map('n', '<leader>pu', vim.pack.update, { desc = "Update plugins" })
 
+map('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code format" })
+map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code actions" })
+map('n', '<leader>cr', vim.lsp.buf.rename, { desc = "Rename" })
 map('n', '<leader>ce', function()
     local filename = vim.fn.expand("%")
     local basename = vim.fn.expand("%:r")
@@ -152,7 +148,6 @@ require "oil".setup()
 
 require "mini.icons".setup()
 require "mini.pairs".setup()
-require "mini.trailspace".setup()
 require "mini.move".setup()
 require "mini.git".setup()
 require "mini.diff".setup()

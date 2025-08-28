@@ -143,11 +143,23 @@ vim.pack.add({
   { src = "https://github.com/echasnovski/mini.nvim" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/mason-org/mason.nvim" },
-  { src = "https://github.com/kepano/flexoki-neovim" },
+  { src = "https://github.com/rebelot/kanagawa.nvim" },
 })
 
-require "flexoki".setup()
-vim.cmd("colorscheme flexoki-dark")
+require "kanagawa".setup({
+  transparent = false,
+  theme = "wave",
+  colors = {
+    theme = {
+      all = {
+        ui = {
+          bg_gutter = "none"
+        }
+      }
+    }
+  }
+})
+vim.cmd("colorscheme kanagawa")
 
 require "oil".setup()
 
@@ -163,7 +175,6 @@ require "mini.tabline".setup()
 require "mini.extra".setup()
 require "mini.surround".setup()
 require "mini.jump2d".setup()
-
 require "mini.snippets".setup()
 require "mini.completion".setup({
   window = {
@@ -229,9 +240,7 @@ miniclue.setup({
 -- LSP
 --------------------------
 require "mason".setup()
-
 vim.lsp.enable({ "lua_ls", "clangd", "bashls", "ols", "gopls", "rust_analyzer" })
-
 
 require "nvim-treesitter.configs".setup({
   ensure_installed = { "lua", "c" },

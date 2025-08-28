@@ -4,15 +4,15 @@ general.import = [ "~/.config/omarchy/current/theme/alacritty.toml" ]
 TERM = "xterm-256color"
 
 [font]
-normal = { family = "CaskaydiaMono Nerd Font" }
-bold = { family = "CaskaydiaMono Nerd Font" }
-italic = { family = "CaskaydiaMono Nerd Font" }
-size = 12
+normal = { family = "Iosevka Nerd Font Mono" }
+bold = { family = "Iosevka Nerd Font Mono" }
+italic = { family = "Iosevka Nerd Font Mono" }
+size = 14
 
 [window]
 dynamic_padding = true
-padding.x = 4
-padding.y = 4
+padding.x = 0
+padding.y = 0
 decorations = "None"
 opacity = 0.88
 

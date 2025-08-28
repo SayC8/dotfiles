@@ -22,7 +22,7 @@ o.incsearch = true
 o.smartcase = true
 o.ignorecase = true
 o.scrolloff = 8
-o.sidescrolloff = 8
+o.sidescrolloff = 14
 o.completeopt = "menu,menuone,fuzzy,noselect,popup,preview"
 o.cursorline = false
 o.splitright = true
@@ -46,12 +46,11 @@ map('n', '<leader>f:', ':Pick history<CR>', { desc = "Search command history" })
 map('n', '<leader>/', ':Pick grep_live<CR>', { desc = "Live grep" })
 map('n', '<leader>e', ':Oil --float<CR>', { desc = "File explorer (oil)" })
 
+map('n', '<leader>uc', ':Pick colorschemes<CR>', { desc = "Colorschemes" })
 
 map('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete current buffer" })
 
-map('n', '<leader>uc', ':Pick colorschemes<CR>', { desc = "Colorschemes" })
-
-map('n', '<C-/>', function()
+map('n', '\\', function()
   vim.cmd(":bot term")
   vim.cmd(":resize 10")
 end, { desc = "Open a terminal" })
@@ -86,7 +85,7 @@ map('n', '<F7>', function()
       return
     end
   elseif filetype == "rust" then
-    cmd = "term cargo run ."
+    cmd = "term cargo run"
   end
   if cmd then
     vim.cmd("w")
@@ -152,8 +151,8 @@ vim.cmd("colorscheme flexoki-dark")
 
 require "oil".setup()
 
-require "mini.icons".setup()
 require "mini.pairs".setup()
+require "mini.icons".setup()
 require "mini.move".setup()
 require "mini.git".setup()
 require "mini.diff".setup()

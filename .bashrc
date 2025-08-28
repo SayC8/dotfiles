@@ -17,3 +17,5 @@ ALIASES_FILE="$HOME/.bash_aliases"
 if [ -f "$ALIASES_FILE" ]; then
   source "$ALIASES_FILE"
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"

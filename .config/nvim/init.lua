@@ -61,7 +61,8 @@ map('n', '<leader>pu', vim.pack.update, { desc = "Update plugins" })
 map('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code format" })
 map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code actions" })
 map('n', '<leader>cr', vim.lsp.buf.rename, { desc = "Rename" })
-map('n', '<leader>ce', function()
+
+map('n', '<F7>', function()
   local filename = vim.fn.expand("%")
   local basename = vim.fn.expand("%:r")
   local filetype = vim.bo.filetype
@@ -84,6 +85,8 @@ map('n', '<leader>ce', function()
       print("No Makefile detected!")
       return
     end
+  elseif filetype == "rust" then
+    cmd = "term cargo run ."
   end
   if cmd then
     vim.cmd("w")
@@ -92,7 +95,7 @@ map('n', '<leader>ce', function()
     vim.cmd(cmd)
     vim.cmd("norm G")
   else
-    print("No interpreter or compiler defined for filetype: '" .. filetype .. "'")
+    print("No interpreter or build system defined for filetype: '" .. filetype .. "'")
   end
 end, { desc = "Code Execute/Compile" })
 
@@ -228,8 +231,7 @@ miniclue.setup({
 --------------------------
 require "mason".setup()
 
-LSPList = { "lua_ls", "clangd", "bash-language-server", "ols", "gopls" }
-vim.lsp.enable(LSPList)
+vim.lsp.enable({ "lua_ls", "clangd", "bashls", "ols", "gopls", "rust_analyzer" })
 
 
 require "nvim-treesitter.configs".setup({

@@ -77,15 +77,13 @@ map('n', '<leader>ce', function()
   end
   if filetype == "lua" then
     cmd = "term lua " .. filename
-  elseif filetype == "c" or filetype == "odin" then
+  elseif filetype == "c" or filetype == "odin" or filetype == "go" then
     if checkFile("./Makefile") then
       cmd = "term make && ./bin/" .. basename
     else
       print("No Makefile detected!")
       return
     end
-  elseif filetype == "go" then
-    cmd = "term go build " .. filename .. " && ./" .. basename
   end
   if cmd then
     vim.cmd("w")
@@ -162,6 +160,7 @@ require "mini.statusline".setup()
 require "mini.tabline".setup()
 require "mini.extra".setup()
 require "mini.surround".setup()
+require "mini.jump2d".setup()
 
 require "mini.snippets".setup()
 require "mini.completion".setup({
@@ -228,13 +227,16 @@ miniclue.setup({
 -- LSP
 --------------------------
 require "mason".setup()
+
+LSPList = { "lua_ls", "clangd", "bash-language-server", "ols", "gopls" }
+vim.lsp.enable(LSPList)
+
+
 require "nvim-treesitter.configs".setup({
   ensure_installed = { "lua", "c" },
   auto_install = true,
   highlight = { enable = true },
 })
-
-vim.lsp.enable({ "lua_ls", "clangd", "bash-language-server", "marksman", "ols", "gopls" })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)

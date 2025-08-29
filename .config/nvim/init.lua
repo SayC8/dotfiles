@@ -42,6 +42,7 @@ map('n', '<leader>fo', ':Pick oldfiles<CR>', { desc = "Search old files" })
 map('n', '<leader>fb', ':Pick buffers<CR>', { desc = "Search buffers" })
 map('n', '<leader>fh', ':Pick help<CR>', { desc = "Search help" })
 map('n', '<leader>fd', ':Pick diagnostic<CR>', { desc = "Search diagnostics" })
+map('n', '<leader>ft', ':Pick hipatterns<CR>', { desc = "Search diagnostics" })
 map('n', '<leader>f:', ':Pick history<CR>', { desc = "Search command history" })
 map('n', '<leader>/', ':Pick grep_live<CR>', { desc = "Live grep" })
 map('n', '<leader>e', ':Oil --float<CR>', { desc = "File explorer (oil)" })
@@ -143,23 +144,11 @@ vim.pack.add({
   { src = "https://github.com/echasnovski/mini.nvim" },
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/mason-org/mason.nvim" },
-  { src = "https://github.com/rebelot/kanagawa.nvim" },
+  { src = "https://github.com/kepano/flexoki-neovim" },
 })
 
-require "kanagawa".setup({
-  transparent = false,
-  theme = "wave",
-  colors = {
-    theme = {
-      all = {
-        ui = {
-          bg_gutter = "none"
-        }
-      }
-    }
-  }
-})
-vim.cmd("colorscheme kanagawa")
+require "flexoki".setup({})
+vim.cmd("colorscheme flexoki")
 
 require "oil".setup()
 
@@ -176,6 +165,20 @@ require "mini.extra".setup()
 require "mini.surround".setup()
 require "mini.jump2d".setup()
 require "mini.snippets".setup()
+
+local hipatterns = require "mini.hipatterns"
+hipatterns.setup({
+  highlighters = {
+    -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+    fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+    hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
+    todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
+    note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
+    -- Highlight hex color strings (`#rrggbb`) using that color
+    hex_color = hipatterns.gen_highlighter.hex_color(),
+  }
+})
+
 require "mini.completion".setup({
   window = {
     info = { height = 25, width = 80, border = "rounded" },

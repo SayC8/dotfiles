@@ -10,9 +10,9 @@ o.relativenumber = true
 o.signcolumn = 'yes'
 o.winborder = "rounded"
 o.expandtab = true
-o.tabstop = 2
-o.softtabstop = 2
-o.shiftwidth = 2
+o.tabstop = 4
+o.softtabstop = 4
+o.shiftwidth = 4
 o.smartindent = true
 o.wrap = false
 o.swapfile = false
@@ -52,8 +52,8 @@ map('n', '<leader>uc', ':Pick colorschemes<CR>', { desc = "Colorschemes" })
 map('n', '<leader>bd', ':bdelete<CR>', { desc = "Delete current buffer" })
 
 map('n', '\\', function()
-  vim.cmd(":bot term")
-  vim.cmd(":resize 10")
+    vim.cmd(":bot term")
+    vim.cmd(":resize 10")
 end, { desc = "Open a terminal" })
 
 map('n', '<leader>pu', vim.pack.update, { desc = "Update plugins" })
@@ -63,88 +63,88 @@ map('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code actions" })
 map('n', '<leader>cr', vim.lsp.buf.rename, { desc = "Rename" })
 
 map('n', '<F7>', function()
-  local filename = vim.fn.expand("%")
-  local basename = vim.fn.expand("%:r")
-  local filetype = vim.bo.filetype
-  local cmd = nil
-  local function checkFile(name)
-    local f = io.open(name, "r")
-    if f then
-      io.close(f)
-      return true
-    else
-      return false
+    local filename = vim.fn.expand("%")
+    local basename = vim.fn.expand("%:r")
+    local filetype = vim.bo.filetype
+    local cmd = nil
+    local function checkFile(name)
+        local f = io.open(name, "r")
+        if f then
+            io.close(f)
+            return true
+        else
+            return false
+        end
     end
-  end
-  if filetype == "lua" then
-    cmd = "term lua " .. filename
-  elseif filetype == "c" or filetype == "odin" or filetype == "go" then
-    if checkFile("./Makefile") then
-      cmd = "term make && ./bin/" .. basename
-    else
-      print("No Makefile detected!")
-      return
+    if filetype == "lua" then
+        cmd = "term lua " .. filename
+    elseif filetype == "c" or filetype == "odin" or filetype == "go" then
+        if checkFile("./Makefile") then
+            cmd = "term make && ./bin/" .. basename
+        else
+            print("No Makefile detected!")
+            return
+        end
+    elseif filetype == "rust" then
+        cmd = "term cargo run"
     end
-  elseif filetype == "rust" then
-    cmd = "term cargo run"
-  end
-  if cmd then
-    vim.cmd("w")
-    vim.cmd("split")
-    vim.cmd("resize 10")
-    vim.cmd(cmd)
-    vim.cmd("norm G")
-  else
-    print("No interpreter or build system defined for filetype: '" .. filetype .. "'")
-  end
+    if cmd then
+        vim.cmd("w")
+        vim.cmd("split")
+        vim.cmd("resize 10")
+        vim.cmd(cmd)
+        vim.cmd("norm G")
+    else
+        print("No interpreter or build system defined for filetype: '" .. filetype .. "'")
+    end
 end, { desc = "Code Execute/Compile" })
 
 --------------------------
 -- Auto-commands etc
 --------------------------
 local function augroup(name)
-  return vim.api.nvim_create_augroup("customGroup_" .. name, { clear = true })
+    return vim.api.nvim_create_augroup("customGroup_" .. name, { clear = true })
 end
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
-  callback = function()
-    (vim.hl or vim.highlight).on_yank()
-  end,
+    group = augroup("highlight_yank"),
+    callback = function()
+        (vim.hl or vim.highlight).on_yank()
+    end,
 })
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
-  group = augroup("resize_splits"),
-  callback = function()
-    local current_tab = vim.fn.tabpagenr()
-    vim.cmd("tabdo wincmd =")
-    vim.cmd("tabnext " .. current_tab)
-  end,
+    group = augroup("resize_splits"),
+    callback = function()
+        local current_tab = vim.fn.tabpagenr()
+        vim.cmd("tabdo wincmd =")
+        vim.cmd("tabnext " .. current_tab)
+    end,
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = augroup("auto_create_dir"),
-  callback = function(event)
-    if event.match:match("^%w%w+:[\\/][\\/]") then
-      return
-    end
-    local file = vim.uv.fs_realpath(event.match) or event.match
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-  end,
+    group = augroup("auto_create_dir"),
+    callback = function(event)
+        if event.match:match("^%w%w+:[\\/][\\/]") then
+            return
+        end
+        local file = vim.uv.fs_realpath(event.match) or event.match
+        vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+    end,
 })
 
 --------------------------
 -- Plugins
 --------------------------
 vim.pack.add({
-  { src = "https://github.com/stevearc/oil.nvim" },
-  { src = "https://github.com/echasnovski/mini.nvim" },
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-  { src = "https://github.com/mason-org/mason.nvim" },
-  { src = "https://github.com/kepano/flexoki-neovim" },
+    { src = "https://github.com/stevearc/oil.nvim" },
+    { src = "https://github.com/echasnovski/mini.nvim" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/kepano/flexoki-neovim" },
 })
 
 require "flexoki".setup({})
@@ -168,75 +168,75 @@ require "mini.snippets".setup()
 
 local hipatterns = require "mini.hipatterns"
 hipatterns.setup({
-  highlighters = {
-    -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-    fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-    hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
-    todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
-    note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
-    -- Highlight hex color strings (`#rrggbb`) using that color
-    hex_color = hipatterns.gen_highlighter.hex_color(),
-  }
+    highlighters = {
+        -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+        fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+        hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
+        todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
+        note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
+        -- Highlight hex color strings (`#rrggbb`) using that color
+        hex_color = hipatterns.gen_highlighter.hex_color(),
+    }
 })
 
 require "mini.completion".setup({
-  window = {
-    info = { height = 25, width = 80, border = "rounded" },
-    signature = { height = 25, width = 80, border = "rounded" },
-  }
+    window = {
+        info = { height = 25, width = 80, border = "rounded" },
+        signature = { height = 25, width = 80, border = "rounded" },
+    }
 })
 
 local miniclue = require('mini.clue')
 miniclue.setup({
-  triggers = {
-    -- Leader triggers
-    { mode = 'n', keys = '<Leader>' },
-    { mode = 'x', keys = '<Leader>' },
+    triggers = {
+        -- Leader triggers
+        { mode = 'n', keys = '<Leader>' },
+        { mode = 'x', keys = '<Leader>' },
 
-    -- Built-in completion
-    { mode = 'i', keys = '<C-x>' },
+        -- Built-in completion
+        { mode = 'i', keys = '<C-x>' },
 
-    -- `g` key
-    { mode = 'n', keys = 'g' },
-    { mode = 'x', keys = 'g' },
+        -- `g` key
+        { mode = 'n', keys = 'g' },
+        { mode = 'x', keys = 'g' },
 
-    -- `s` key
-    { mode = 'n', keys = 's' },
-    { mode = 'x', keys = 's' },
+        -- `s` key
+        { mode = 'n', keys = 's' },
+        { mode = 'x', keys = 's' },
 
-    -- Square brackets
-    { mode = 'n', keys = ']' },
-    { mode = 'n', keys = '[' },
+        -- Square brackets
+        { mode = 'n', keys = ']' },
+        { mode = 'n', keys = '[' },
 
-    -- Marks
-    { mode = 'n', keys = "'" },
-    { mode = 'n', keys = '`' },
-    { mode = 'x', keys = "'" },
-    { mode = 'x', keys = '`' },
+        -- Marks
+        { mode = 'n', keys = "'" },
+        { mode = 'n', keys = '`' },
+        { mode = 'x', keys = "'" },
+        { mode = 'x', keys = '`' },
 
-    -- Registers
-    { mode = 'n', keys = '"' },
-    { mode = 'x', keys = '"' },
-    { mode = 'i', keys = '<C-r>' },
-    { mode = 'c', keys = '<C-r>' },
+        -- Registers
+        { mode = 'n', keys = '"' },
+        { mode = 'x', keys = '"' },
+        { mode = 'i', keys = '<C-r>' },
+        { mode = 'c', keys = '<C-r>' },
 
-    -- Window commands
-    { mode = 'n', keys = '<C-w>' },
+        -- Window commands
+        { mode = 'n', keys = '<C-w>' },
 
-    -- `z` key
-    { mode = 'n', keys = 'z' },
-    { mode = 'x', keys = 'z' },
-  },
+        -- `z` key
+        { mode = 'n', keys = 'z' },
+        { mode = 'x', keys = 'z' },
+    },
 
-  clues = {
-    -- Enhance this by adding descriptions for <Leader> mapping groups
-    miniclue.gen_clues.builtin_completion(),
-    miniclue.gen_clues.g(),
-    miniclue.gen_clues.marks(),
-    miniclue.gen_clues.registers(),
-    miniclue.gen_clues.windows(),
-    miniclue.gen_clues.z(),
-  },
+    clues = {
+        -- Enhance this by adding descriptions for <Leader> mapping groups
+        miniclue.gen_clues.builtin_completion(),
+        miniclue.gen_clues.g(),
+        miniclue.gen_clues.marks(),
+        miniclue.gen_clues.registers(),
+        miniclue.gen_clues.windows(),
+        miniclue.gen_clues.z(),
+    },
 })
 
 --------------------------
@@ -246,16 +246,16 @@ require "mason".setup()
 vim.lsp.enable({ "lua_ls", "clangd", "bashls", "ols", "gopls", "rust_analyzer" })
 
 require "nvim-treesitter.configs".setup({
-  ensure_installed = { "lua", "c" },
-  auto_install = true,
-  highlight = { enable = true },
+    ensure_installed = { "lua", "c" },
+    auto_install = true,
+    highlight = { enable = true },
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-    end
-  end,
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client:supports_method('textDocument/completion') then
+            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+        end
+    end,
 })

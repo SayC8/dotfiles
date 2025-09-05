@@ -86,7 +86,7 @@ map('n', '<F7>', function()
             return
         end
     elseif filetype == "rust" then
-        cmd = "term cargo run"
+        cmd = "term cargo build"
     end
     if cmd then
         vim.cmd("w")

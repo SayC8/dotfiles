@@ -19,3 +19,6 @@ if [ -f "$ALIASES_FILE" ]; then
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+. "$HOME/.local/share/../bin/env"
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"

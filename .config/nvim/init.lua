@@ -84,7 +84,7 @@ map('n', '<F7>', function()
     end
     if filetype == "lua" then
         cmd = "term lua " .. filename
-    elseif filetype == "c" or filetype == "odin" then
+    elseif filetype == "c" or filetype == "odin" or filetype == "go" then
         if checkFile("./Makefile") then
             cmd = "term make && ./bin/" .. basename
         else
@@ -248,7 +248,7 @@ miniclue.setup({
 -- LSP
 --------------------------
 require "mason".setup()
-vim.lsp.enable({ "asm_lsp", "lua_ls", "clangd", "bashls", "ols", "gopls", "rust_analyzer", "pylsp" })
+vim.lsp.enable({ "lua_ls", "clangd", "bashls", "ols", "gopls", "rust_analyzer", "pylsp" })
 
 require "nvim-treesitter.configs".setup({
     ensure_installed = { "lua", "c" },
